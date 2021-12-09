@@ -6,10 +6,12 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 
 import ec.edu.ups.pw2.demoapp2.ON.CalculadoraONRemote;
+import ec.edu.ups.pw2.demoapp2.ON.PersonaONRemote;
 
 public class VentanaCalculadora {
 	
 	private CalculadoraONRemote calcRemote;
+	private PersonaONRemote prOnRemote;
 	
 	public void conectar() throws Exception {
 		try {  
@@ -28,6 +30,7 @@ public class VentanaCalculadora {
             final String lookupName = "ejb:/demoapp2/CalculadoraON!ec.edu.ups.pw2.demoapp2.ON.CalculadoraONRemote";  
               
             this.calcRemote = (CalculadoraONRemote) context.lookup(lookupName);
+            this.prOnRemote = (PersonaONRemote) context.lookup("ejb:/demoapp2/PersonaON!ec.edu.ups.pw2.demoapp2.ON.PersonaONRemote");
               
         } catch (Exception ex) {  
             ex.printStackTrace();  
@@ -40,11 +43,17 @@ public class VentanaCalculadora {
 		System.out.println("SUMA " + d);
 	}
 	
+	public void crearPersona() {
+		this.prOnRemote.crear("0102", "Edu Ayora", "Cuenca");
+		System.out.println("Persona creada con éxito");
+	}
+	
 	public static void main(String[] args) {
 		VentanaCalculadora vtnCalc = new VentanaCalculadora();
 		try {
 			vtnCalc.conectar();
 			vtnCalc.sumar();
+			vtnCalc.crearPersona();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
