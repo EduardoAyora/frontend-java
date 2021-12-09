@@ -43,12 +43,13 @@ public class VentanaCalculadora {
 		System.out.println("SUMA " + d);
 	}
 	
-	public void crearPersona() {
-		this.prOnRemote.crear("0102", "Edu Ayora", "Cuenca");
-		System.out.println("Persona creada con éxito");
+	public void crearPersona(String cedula, String nombre, String direccion) {
+		this.prOnRemote.crear(cedula, nombre, direccion);
+		System.out.println("Persona creada con éxito " + cedula + " " + nombre + " " + direccion);
 	}
 	
-	public static void main(String[] args) {
+	/*
+	public void main(String[] args) {
 		VentanaCalculadora vtnCalc = new VentanaCalculadora();
 		try {
 			vtnCalc.conectar();
@@ -57,7 +58,7 @@ public class VentanaCalculadora {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 
 }
