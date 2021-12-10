@@ -125,6 +125,21 @@ public class main {
 			}
 		});
 		panel_4.add(btnNewButton);
+		
+		JPanel panel_factura = new JPanel();
+		frame.getContentPane().add(panel_factura);
+		panel_factura.setLayout(new GridLayout(4, 0, 0, 0));
+		
+		JPanel panel_5 = new JPanel();
+		panel_factura.add(panel_5);
+		
+		JButton btnFactura = new JButton("Crear Factura");
+		btnFactura.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ventanaCalculadora.insertarFactura();
+			}
+		});
+		panel_5.add(btnFactura);
 	}
 
 }

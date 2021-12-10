@@ -1,17 +1,22 @@
 package ec.edu.ups.pw2.demoapp2.view;
 
+import java.util.Date;
 import java.util.Hashtable;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
 import ec.edu.ups.pw2.demoapp2.ON.CalculadoraONRemote;
+import ec.edu.ups.pw2.demoapp2.ON.FacturacionONRemote;
 import ec.edu.ups.pw2.demoapp2.ON.PersonaONRemote;
+import ec.edu.ups.pw2.demoapp2.model.Factura;
+import ec.edu.ups.pw2.demoapp2.model.Persona;
 
 public class VentanaCalculadora {
 	
 	private CalculadoraONRemote calcRemote;
 	private PersonaONRemote prOnRemote;
+	private FacturacionONRemote facturacionONRemote;
 	
 	public void conectar() throws Exception {
 		try {  
@@ -31,11 +36,28 @@ public class VentanaCalculadora {
               
             this.calcRemote = (CalculadoraONRemote) context.lookup(lookupName);
             this.prOnRemote = (PersonaONRemote) context.lookup("ejb:/demoapp2/PersonaON!ec.edu.ups.pw2.demoapp2.ON.PersonaONRemote");
-              
+            this.facturacionONRemote = (FacturacionONRemote) context.lookup("ejb:/demoapp2/FacturacionON!ec.edu.ups.pw2.demoapp2.ON.FacturacionONRemote");
         } catch (Exception ex) {  
             ex.printStackTrace();  
             throw ex;  
         }  
+	}
+	
+	public void insertarFactura() {
+		Factura factura = new Factura();
+		factura.setNumero(1);
+		factura.setFecha(new Date());
+		
+		Persona persona = new Persona();
+		persona.setCedula("0106");
+		
+		factura.setCliente(persona);
+		
+		try {
+			this.facturacionONRemote.insertar(factura);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void sumar() {
