@@ -1,7 +1,9 @@
 package ec.edu.ups.pw2.demoapp2.view;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Hashtable;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -43,21 +45,22 @@ public class VentanaCalculadora {
         }  
 	}
 	
-	public void insertarFactura() {
-		Factura factura = new Factura();
-		factura.setNumero(1);
-		factura.setFecha(new Date());
-		
-		Persona persona = new Persona();
-		persona.setCedula("0106");
-		
-		factura.setCliente(persona);
-		
+	public void insertarFactura(Factura factura) {
 		try {
 			this.facturacionONRemote.insertar(factura);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public List<String> listarFacturas() {
+		List<String> facturas = new ArrayList<String>();
+		try {
+			 facturas = this.facturacionONRemote.getFacturas();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return facturas;
 	}
 	
 	public void sumar() {
