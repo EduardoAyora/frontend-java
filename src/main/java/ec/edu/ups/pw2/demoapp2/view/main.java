@@ -94,8 +94,25 @@ public class main {
 		panel.add(panel_1);
 		panel_1.setLayout(new GridLayout(2, 1, 0, 0));
 		
+		JPanel panel_11 = new JPanel();
+		panel_1.add(panel_11);
+		panel_11.setLayout(new GridLayout(0, 2, 0, 0));
+		
 		JLabel lblNewLabel = new JLabel("Cédula");
-		panel_1.add(lblNewLabel);
+		panel_11.add(lblNewLabel);
+		
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String cedula = txtCedula.getText();
+				Persona persona = ventanaCalculadora.buscarCliente(cedula);
+				if (persona != null) {
+					txtNombre.setText(persona.getNombre());
+					txtDireccion.setText(persona.getDireccion());
+				}
+			}
+		});
+		panel_11.add(btnBuscar);
 		
 		txtCedula = new JTextField();
 		panel_1.add(txtCedula);

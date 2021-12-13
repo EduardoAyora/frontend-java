@@ -53,6 +53,16 @@ public class VentanaCalculadora {
 		}
 	}
 	
+	public Persona buscarCliente(String cedula) {
+		Persona persona = null;
+		try {
+			persona = this.prOnRemote.buscar(cedula);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return persona;
+	}
+	
 	public List<String> listarFacturas() {
 		List<String> facturas = new ArrayList<String>();
 		try {
